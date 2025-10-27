@@ -1,0 +1,35 @@
+{
+  "variables" : [ {
+    "name" : "SAKILA_SOURCE_HOSTNAME",
+    "value" : "localhost",
+    "description" : ""
+  }, {
+    "name" : "SAKILA_SOURCE_PORT",
+    "value" : "5433",
+    "description" : ""
+  }, {
+    "name" : "SAKILA_SOURCE_USERNAME",
+    "value" : "sakila",
+    "description" : ""
+  }, {
+    "name" : "SAKILA_SOURCE_PASSWORD",
+    "value" : "password",
+    "description" : ""
+  }, {
+    "name" : "SAKILA_DWH_HOSTNAME",
+    "value" : "localhost",
+    "description" : ""
+  }, {
+    "name" : "SAKILA_DWH_PORT",
+    "value" : "5433",
+    "description" : ""
+  }, {
+    "name" : "SAKILA_DWH_USERNAME",
+    "value" : "sakila",
+    "description" : ""
+  }, {
+    "name" : "SAKILA_DWH_PASSWORD",
+    "value" : "password",
+    "description" : ""
+  } ]
+}
