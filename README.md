@@ -65,60 +65,69 @@ sakila-hop/
 
 ### 1. Set Up the Database
 
-You have two options:
+You have two options for setting up the database:
 
-**Option A: Use Your Own PostgreSQL Server**
+**Option A: Automated Setup with Docker Compose (Recommended)**
 
-If you already have a PostgreSQL server running, you can skip to step 2 and use your existing server. Just make sure to note your connection details for the configuration step.
+This option will automatically create the database, schemas, tables, and load all sample data.
 
-**Option B: Use Docker (Recommended for Quick Start)**
+1. Create a `.env` file in the [docker](docker/) directory:
 
-Start the PostgreSQL database using the provided Docker Compose configuration:
+```
+POSTGRES_USER=sakila
+POSTGRES_PASSWORD=password
+POSTGRES_DB=sakila
+POSTGRES_PORT=5432
+```
+
+2. Start the PostgreSQL container:
 
 ```bash
 cd docker
 docker-compose up -d
 ```
 
-Set the required environment variables by creating a `.env` file in the `docker` directory:
+The initialization script will automatically:
+- Create the `source` and `dwh` schemas
+- Load all source tables and data from the Sakila database
+- Create all data warehouse dimension and fact tables
 
-```
-POSTGRES_USER=your_user
-POSTGRES_PASSWORD=your_password
-POSTGRES_DB=sakila
-POSTGRES_PORT=5432
-```
+That's it! Skip to step 3 (Set Up Apache Hop Project).
 
-### 2. Initialize the Database
+**Option B: Manual Setup**
 
-First, create the required schemas:
+If you prefer to use your own PostgreSQL server or set up the database manually:
+
+1. Ensure you have a PostgreSQL server running and note your connection details
+
+2. Create the required schemas:
 
 ```bash
 psql -U your_user -d sakila -c "CREATE SCHEMA IF NOT EXISTS source;"
 psql -U your_user -d sakila -c "CREATE SCHEMA IF NOT EXISTS dwh;"
 ```
 
-Load the Sakila source schema and data:
+3. Load the Sakila source schema and data:
 
 ```bash
 psql -U your_user -d sakila -f ddl/postgres/sakila-postgres-schema.sql
 psql -U your_user -d sakila -f ddl/postgres/sakila-postgres-data.sql
 ```
 
-Create the data warehouse schema:
+4. Create the data warehouse schema:
 
 ```bash
 psql -U your_user -d sakila -f ddl/postgres/sakila-dwh-postgres-schema.sql
 ```
 
-### 3. Set Up Apache Hop Project
+### 2. Set Up Apache Hop Project
 
 1. Open Apache Hop
 2. Create a new project named `sakila-hop`
 3. Point the project home directory to this project's root directory (where [project-config.json](project-config.json) is located)
 4. Apache Hop will automatically use the `project-config.json` file to configure the project
 
-### 4. Set Up Apache Hop Environment
+### 3. Set Up Apache Hop Environment
 
 1. In Apache Hop, create a new environment called `development`
 2. Point it to the [environments/development.json](environments/development.json) file in this project
@@ -165,7 +174,7 @@ The database connections are already configured and parameterized - simply updat
 }
 ```
 
-### 5. Run the ETL
+### 4. Run the ETL
 
 Execute the main workflow:
 
