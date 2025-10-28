@@ -5,7 +5,7 @@
     "description" : ""
   }, {
     "name" : "SAKILA_SOURCE_PORT",
-    "value" : "5433",
+    "value" : "5432",
     "description" : ""
   }, {
     "name" : "SAKILA_SOURCE_USERNAME",
@@ -21,7 +21,7 @@
     "description" : ""
   }, {
     "name" : "SAKILA_DWH_PORT",
-    "value" : "5433",
+    "value" : "5432",
     "description" : ""
   }, {
     "name" : "SAKILA_DWH_USERNAME",
